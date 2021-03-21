@@ -15,6 +15,9 @@ public class Order {
     public static final int MAX_NUMBERS_ORDERED = 10;
     private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
     private int qtyOrdered = 0;
+    private static int nbOrdered = 0;
+    public static final int MAX_LIMITED_ORDERS = 5;
+    private myDate dateOrdered;
 
     public int getQtyOrdered() {
         return qtyOrdered;
@@ -23,7 +26,14 @@ public class Order {
     public void setQtyOrdered(int qtyOrdered) {
         this.qtyOrdered = qtyOrdered;
     }
-    
+
+    public Order(myDate dateOrdered) {
+        if (nbOrdered < MAX_LIMITED_ORDERS) {
+            this.dateOrdered = dateOrdered;
+            nbOrdered++;
+        } else System.out.println("Can't add more orders!");
+    }
+        
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
         if(qtyOrdered < MAX_NUMBERS_ORDERED) {
             itemsOrdered[qtyOrdered] = disc;
@@ -84,9 +94,21 @@ public class Order {
         return sum;
     }
     
-    public void showOrders(){
+    public void showOrders() {
         for (int i = 0; i < qtyOrdered; i++) {
-            System.out.println(i+1 + ". " + itemsOrdered[i].getTitle());
+            System.out.println(i+1 + ". DVD " + itemsOrdered[i].getTitle() + " - "
+            + itemsOrdered[i].getCategory() + " - " + itemsOrdered[i].getDirector()+ " - "
+            + itemsOrdered[i].getLength() + ": " + itemsOrdered[i].getCost() + "$");
         }
+    }
+    
+    public void printOrder() {
+        System.out.println("***********************Order***********************");
+        System.out.print("Date: "); 
+        dateOrdered.print1();
+        System.out.println("Ordered Items: ");
+        showOrders();
+        System.out.println("Total Cost: " + totalCost());
+        System.out.println("***************************************************");
     }
 }

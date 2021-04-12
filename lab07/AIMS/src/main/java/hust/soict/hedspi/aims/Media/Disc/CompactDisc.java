@@ -25,7 +25,6 @@ public class CompactDisc extends Disc implements Playable{
     public CompactDisc(int id, String title, String category, String director, String artist, float cost) {
         super(id, title, category, cost, director);
         this.artist = artist;
-        allMediaList.addIntoList(this);
     }   
     
     public void addTrack(Track trackItem) {

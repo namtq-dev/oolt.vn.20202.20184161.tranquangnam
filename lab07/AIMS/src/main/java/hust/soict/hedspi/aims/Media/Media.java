@@ -5,6 +5,8 @@
  */
 package hust.soict.hedspi.aims.Media;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Wind
@@ -56,6 +58,27 @@ public abstract class Media {
         this.category = category;
         this.cost = cost;
         this.id = id;
+    }
+    
+    public static Media search(String title) {
+        String[] tmp1 = title.split("\\s");
+        for (Media item : allMediaList.allMedia) {
+            String[] tmp2 = item.getTitle().split("\\s");
+            int count = 0;
+            for (String check2 : tmp2) {
+                for (String check1 : tmp1) {
+                    if(check1.equalsIgnoreCase(check2)) {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            if (count == tmp2.length) {
+                return item;
+            }
+        }
+        System.out.println("Can't find item!");
+        return null;
     }
         
     public abstract String showInfo();

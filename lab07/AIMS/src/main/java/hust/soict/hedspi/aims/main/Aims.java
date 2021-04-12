@@ -46,6 +46,14 @@ public class Aims {
         System.out.println("Please choose a number: 0-1-2-3-4");
     }
     
+    public static void showAddMenu() {
+        System.out.println("1. Add DVD to the order");
+        System.out.println("2. Add CD to the order");
+        System.out.println("3. Add Book to the order");
+        System.out.println("0. Exit");
+
+    }
+    
     public static void main(String[] args) {
         List<Order> orderList = new ArrayList<>();
         Date date1 = new Date("first", "July", "twenty twenty");
@@ -59,7 +67,7 @@ public class Aims {
         CompactDisc cd1 = new CompactDisc(7, "Nhac nam moi", "Nhac pop", "Hong Duc", "Duc", 100);
         cd1.addTrack(track1);
         cd1.addTrack(track2);
-        CompactDisc cd2 = new CompactDisc(7, "Nhac cach mang", "Nhac do", "Cong Ly", "MTP", 150);
+        CompactDisc cd2 = new CompactDisc(8, "Nhac cach mang", "Nhac do", "Cong Ly", "MTP", 150);
 
         
         Book b1 = new Book(4, "De Men phieu luu ky", "Sach Viet Nam", 20);
@@ -67,7 +75,7 @@ public class Aims {
         Book b2 = new Book(5, "Loc Dinh Ky", "Sach Trung Quoc", 15.59f);
         Book b3 = new Book(6, "Vo nhat", "Sach Viet Nam", 50);
         b3.addAuthor("Nam Cao");
-        b3.addAuthor("Xuan Dieu");
+        b3.addAuthor("Xuan Dieu");                   
         
         Scanner sc = new Scanner(System.in);
         int select = -1;
@@ -79,12 +87,52 @@ public class Aims {
                 if (Order.nbOrdered < Order.MAX_LIMITED_ORDERS) {
                     Order newOrder = new Order(date1);
                     orderList.add(newOrder);
+                    System.out.println("Order created!");
                 } else System.out.println("Can't create more order!");
                 break;
             case 2:
-                System.out.println("Insert the item id you want to add: ");
-                int addItemId = sc.nextInt();
-                orderList.get(Order.nbOrdered - 1).addMediaById(addItemId);
+                int add = -1;
+                while (add != 0) {                    
+                    showAddMenu();
+                    String tmp;
+                    add = sc.nextInt();
+                    sc.nextLine();
+                    switch(add) {
+                        case 1:
+                            System.out.println("Insert the title of the DVD: ");
+                            tmp = sc.nextLine();
+                            DigitalVideoDisc tmpDVDItem = (DigitalVideoDisc)Media.search(tmp);
+                            if (tmpDVDItem != null) {
+                                orderList.get(Order.nbOrdered - 1).addMedia(tmpDVDItem); 
+                                System.out.println("Do you want to play the DVD? Yes/No");
+                                tmp = sc.nextLine();
+                                if (tmp.equalsIgnoreCase("Yes")) {
+                                    tmpDVDItem.play();
+                                }
+                            }                          
+                            break;
+                        case 2:
+                            System.out.println("Insert the title of the CD: ");
+                            tmp = sc.nextLine();
+                            CompactDisc tmpCDItem = (CompactDisc)Media.search(tmp);
+                            if (tmpCDItem != null) {
+                                orderList.get(Order.nbOrdered - 1).addMedia(tmpCDItem); 
+                                System.out.println("Do you want to play the CD? Yes/No");
+                                tmp = sc.nextLine();
+                                if (tmp.equalsIgnoreCase("Yes")) {
+                                    tmpCDItem.play();
+                                }
+                            }
+                            break;
+                        case 3:
+                            System.out.println("Insert the title of the book: ");
+                            tmp = sc.nextLine();
+                            orderList.get(Order.nbOrdered - 1).addMediaByTitle(tmp);  
+                            break;  
+                        case 0:
+                            break;
+                    }
+                }       
                 break;       
             case 3:
                 System.out.println("Insert the item id you want to delete: ");

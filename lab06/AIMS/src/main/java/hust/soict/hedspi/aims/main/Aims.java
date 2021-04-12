@@ -40,8 +40,12 @@ public class Aims {
         DigitalVideoDisc dvd2 = new DigitalVideoDisc(2, "Star Wars", "Science Fiction", "George Lucas", 97, 24.95f);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc(3, "Aladin", "Animation", 18.99f);
         
-        Book b1 = new Book(4, "nam");
-        Book b2 = new Book(5, "duc");
+        Book b1 = new Book(4, "De Men phieu luu ky");
+        b1.addAuthor("To Hoai");
+        Book b2 = new Book(5, "Cafe");
+        Book b3 = new Book(6, "Vo nhat");
+        b3.addAuthor("Nam Cao");
+        b3.addAuthor("Xuan Dieu");
         
         Scanner sc = new Scanner(System.in);
         int select = -1;

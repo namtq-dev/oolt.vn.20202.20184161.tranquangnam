@@ -16,7 +16,6 @@ public class DigitalVideoDisc extends Disc implements Playable{
       
     public DigitalVideoDisc(int id, String title, String category, String director, float cost,  int length) {
         super(id, title, category, cost, director, length);
-        allMediaList.addIntoList(this);
     }     
 
     @Override

@@ -43,19 +43,31 @@ public class Order {
         } else System.out.println("The items ordered list is full!");
     }
     
+    public void addMediaByTitle(String title) {
+        if (itemsOrdered.size() < MAX_NUMBERS_ORDERED) {
+            Media tmp = Media.search(title);
+            if(tmp != null) {
+                itemsOrdered.add(tmp);
+                System.out.println("Item added!");
+            }
+        } else System.out.println("The items ordered list is full!");
+    }
+    
     public void addMediaById(int id) {
         boolean check = false;
-        for (Media media : allMediaList.allMedia) {
-            if (media.getId() == id) {
-                itemsOrdered.add(media);
-                System.out.println("Item added!");
-                check = true;
-                break;
+        if (itemsOrdered.size() < MAX_NUMBERS_ORDERED) {
+            for (Media media : allMediaList.allMedia) {
+                if (media.getId() == id) {
+                    itemsOrdered.add(media);
+                    System.out.println("Item added!");
+                    check = true;
+                    break;
+                }
             }
-        }
-        if (check == false) {
-            System.out.println("Can't find this item!");
-        }
+            if (check == false) {
+                System.out.println("Can't find this item!");
+            }
+        } else System.out.println("The items ordered list is full!");    
     }
     
     public void removeMedia(Media media) {

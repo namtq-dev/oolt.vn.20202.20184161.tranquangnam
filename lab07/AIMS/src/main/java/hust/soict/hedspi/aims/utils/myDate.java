@@ -9,7 +9,7 @@ package hust.soict.hedspi.aims.utils;
  *
  * @author Wind
  */
-public class Date {
+public class myDate {
     private String dayName;
     private String monthName;
     private String yearName;
@@ -55,7 +55,7 @@ public class Date {
     }
 
     
-    public Date(String dayName, String monthName, String yearName) {
+    public myDate(String dayName, String monthName, String yearName) {
         this.dayName = dayName;
         this.monthName = monthName;
         this.yearName = yearName;

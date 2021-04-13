@@ -24,6 +24,28 @@ public class Track implements Playable{
     public Track(String title, int length) {
         this.title = title;
         this.length = length;
+        allTrackList.addIntoList(this);
+    }
+    
+    public static Track search(String title) {
+        String[] tmp1 = title.split("\\s");
+        for (Track item : allTrackList.allTracks) {
+            String[] tmp2 = item.getTitle().split("\\s");
+            int count = 0;
+            for (String check2 : tmp2) {
+                for (String check1 : tmp1) {
+                    if(check1.equalsIgnoreCase(check2)) {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            if (count == tmp2.length) {
+                return item;
+            }
+        }
+        System.out.println("Can't find item!");
+        return null;
     }
 
     @Override

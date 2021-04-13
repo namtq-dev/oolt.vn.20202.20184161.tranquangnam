@@ -12,16 +12,71 @@ import hust.soict.hedspi.aims.Media.Disc.Track;
 import hust.soict.hedspi.aims.Media.Media;
 import hust.soict.hedspi.aims.Media.allMediaList;
 import hust.soict.hedspi.aims.Orders.Order;
-import hust.soict.hedspi.aims.utils.Date;
+import hust.soict.hedspi.aims.utils.myDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+                                                          
 /**
  *
  * @author Wind
  */
 public class Aims {
+    
+    public static void createItem(int choose) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Insert ID: "); int ID = sc.nextInt(); sc.nextLine();
+        System.out.println("Insert Title: "); String title = sc.nextLine();
+        System.out.println("Insert Category: "); String category = sc.nextLine();
+        System.out.println("Insert Cost: "); float cost = sc.nextFloat();
+        sc.nextLine();
+        switch (choose) {
+            case 1:
+                {
+                    System.out.println("Insert Length: ");
+                    int length = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Insert Director: ");
+                    String director = sc.nextLine();
+                    DigitalVideoDisc newDVD = new DigitalVideoDisc(ID, title, category, director, cost, length);
+                    break;
+                }
+            case 2:
+                {
+                    System.out.println("Insert Director: ");
+                    String director = sc.nextLine();
+                    System.out.println("Insert Artist: ");
+                    String artist = sc.nextLine();
+                    CompactDisc newCD = new CompactDisc(ID, title, category, director, artist, cost);
+                    System.out.println("Number of Tracks: ");
+                    int numberOfTrack = sc.nextInt();
+                    sc.nextLine();
+                    int length = 0;
+                    for (int i = 0; i < numberOfTrack; i++)
+                    {
+                        System.out.println("Insert Title: "); title = sc.nextLine();
+                        System.out.println("Insert Length: "); length = sc.nextInt();
+                        sc.nextLine();
+                        Track newTrack = new Track(title, length);
+                        newCD.addTrack(newTrack);
+                    }   
+                    break;
+                }
+            case 3:
+                System.out.println("Number of Authors: ");
+                int numberOfAuthor = sc.nextInt();
+                sc.nextLine();
+                Book newBook = new Book(ID, title, category, cost);
+                for (int i = 0; i < numberOfAuthor; i++)
+                {
+                    System.out.println("Input Author: ");
+                    String author = sc.nextLine();
+                    newBook.addAuthor(author);
+                }   break;
+                default:
+                    break;
+        }
+    }
     
     public static void showAdminMenu() {
         System.out.println("Product Management Application: ");
@@ -31,6 +86,14 @@ public class Aims {
         System.out.println("3. Display the items list");
         System.out.println("0. Exit");
         System.out.println("--------------------------------");
+        System.out.println("Please choose a number: 0-1-2-3");
+    }
+    
+    public static void showCreateMenu() {
+        System.out.println("1. Create DVD");
+        System.out.println("2. Create CD");
+        System.out.println("3. Create Book");
+        System.out.println("0. Exit");
         System.out.println("Please choose a number: 0-1-2-3");
     }
     
@@ -51,35 +114,78 @@ public class Aims {
         System.out.println("2. Add CD to the order");
         System.out.println("3. Add Book to the order");
         System.out.println("0. Exit");
-
     }
     
     public static void main(String[] args) {
+        Scanner scAdmin = new Scanner(System.in);
+        int selectAdmin = -1;
+        while (selectAdmin != 0) {            
+            showAdminMenu();
+            selectAdmin = scAdmin.nextInt();
+            switch(selectAdmin){
+                case 1:
+                    int choose = -1;
+                    while (choose != 0) {                        
+                        showCreateMenu();
+                        choose = scAdmin.nextInt();
+//                        scAdmin.nextLine();
+                        switch(choose){
+                            case 1:
+                                System.out.println("1");
+                                createItem(1);
+                                break;
+                            case 2:
+                                createItem(2);
+                                break;
+                            case 3:
+                                createItem(3);
+                                break;
+                            case 0:
+                                System.out.println("Exit Create Menu");
+                        }
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 0:
+                    System.out.println("Exit admin menu!");
+                    break;
+                default:
+                    System.out.println("Invalid function!");
+                    break;                 
+            }
+        } 
+        
+        myDate date1 = new myDate("first", "July", "twenty twenty");
+        
+//        DigitalVideoDisc dvd1 = new DigitalVideoDisc(1, "The Lion King", "Animation", "Roger Allers", 19.95f, 87);
+//        DigitalVideoDisc dvd2 = new DigitalVideoDisc(2, "Star Wars", "Science Fiction", "George Lucas", 24.95f, 97);
+//        DigitalVideoDisc dvd3 = new DigitalVideoDisc(3, "Aladin", "Animation", "Disney", 18.99f, 110);
+//        
+//        Track track1 = new Track("Happy new year", 3);
+//        Track track2 = new Track("Xuan nay con khong ve", 4);
+//        Track track3 = new Track("Doraemon BGM", 2);
+//        Track track4 = new Track("Bad guy", 4);
+//        CompactDisc cd1 = new CompactDisc(7, "Nhac nam moi", "Nhac pop", "Hong Duc", "Duc", 100);
+//        cd1.addTrack(track1);
+//        cd1.addTrack(track2);
+//        CompactDisc cd2 = new CompactDisc(8, "Nhac cach mang", "Nhac do", "Cong Ly", "MTP", 150);
+//
+//        
+//        Book b1 = new Book(4, "De Men phieu luu ky", "Sach Viet Nam", 20);
+//        b1.addAuthor("To Hoai");
+//        Book b2 = new Book(5, "Loc Dinh Ky", "Sach Trung Quoc", 15.59f);
+//        Book b3 = new Book(6, "Vo nhat", "Sach Viet Nam", 50);
+//        b3.addAuthor("Nam Cao");
+//        b3.addAuthor("Xuan Dieu");                   
+        
         List<Order> orderList = new ArrayList<>();
-        Date date1 = new Date("first", "July", "twenty twenty");
-        
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc(1, "The Lion King", "Animation", "Roger Allers", 19.95f, 87);
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc(2, "Star Wars", "Science Fiction", "George Lucas", 24.95f, 97);
-        DigitalVideoDisc dvd3 = new DigitalVideoDisc(3, "Aladin", "Animation", "Disney", 18.99f, 110);
-        
-        Track track1 = new Track("Happy new year", 3);
-        Track track2 = new Track("Xuan nay con khong ve", 4);
-        CompactDisc cd1 = new CompactDisc(7, "Nhac nam moi", "Nhac pop", "Hong Duc", "Duc", 100);
-        cd1.addTrack(track1);
-        cd1.addTrack(track2);
-        CompactDisc cd2 = new CompactDisc(8, "Nhac cach mang", "Nhac do", "Cong Ly", "MTP", 150);
-
-        
-        Book b1 = new Book(4, "De Men phieu luu ky", "Sach Viet Nam", 20);
-        b1.addAuthor("To Hoai");
-        Book b2 = new Book(5, "Loc Dinh Ky", "Sach Trung Quoc", 15.59f);
-        Book b3 = new Book(6, "Vo nhat", "Sach Viet Nam", 50);
-        b3.addAuthor("Nam Cao");
-        b3.addAuthor("Xuan Dieu");                   
-        
         Scanner sc = new Scanner(System.in);
         int select = -1;
         while (select != 0) {
+            System.out.println();
             showMenu();
             select = sc.nextInt();
             switch(select){
@@ -92,7 +198,8 @@ public class Aims {
                 break;
             case 2:
                 int add = -1;
-                while (add != 0) {                    
+                while (add != 0) {    
+                    System.out.println();
                     showAddMenu();
                     String tmp;
                     add = sc.nextInt();
@@ -116,7 +223,21 @@ public class Aims {
                             tmp = sc.nextLine();
                             CompactDisc tmpCDItem = (CompactDisc)Media.search(tmp);
                             if (tmpCDItem != null) {
-                                orderList.get(Order.nbOrdered - 1).addMedia(tmpCDItem); 
+                                orderList.get(Order.nbOrdered - 1).addMedia(tmpCDItem);
+                                
+                                System.out.println("Do you want to add track? Yes/No");
+                                tmp = sc.nextLine();
+                                while (tmp.equalsIgnoreCase("Yes")) {                                 
+                                    System.out.println("Insert the title of the track you want to add: ");
+                                    tmp = sc.nextLine();
+                                    Track tmpTrack = Track.search(tmp);
+                                    if (tmpTrack != null) {
+                                        tmpCDItem.addTrack(tmpTrack);
+                                    }
+                                    System.out.println("Do you want to add another track? Yes/No");
+                                    tmp = sc.nextLine();
+                                }
+                                
                                 System.out.println("Do you want to play the CD? Yes/No");
                                 tmp = sc.nextLine();
                                 if (tmp.equalsIgnoreCase("Yes")) {
@@ -130,6 +251,10 @@ public class Aims {
                             orderList.get(Order.nbOrdered - 1).addMediaByTitle(tmp);  
                             break;  
                         case 0:
+                            System.out.println("Order completed!");
+                            break;
+                        default:
+                            System.out.println("Invalid function!");
                             break;
                     }
                 }       
@@ -152,6 +277,7 @@ public class Aims {
         
         
     }
+
     
 
 }

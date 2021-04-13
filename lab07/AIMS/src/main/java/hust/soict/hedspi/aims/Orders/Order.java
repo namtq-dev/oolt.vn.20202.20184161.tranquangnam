@@ -8,7 +8,7 @@ package hust.soict.hedspi.aims.Orders;
 import hust.soict.hedspi.aims.Media.Disc.DigitalVideoDisc;
 import hust.soict.hedspi.aims.Media.Media;
 import hust.soict.hedspi.aims.Media.allMediaList;
-import hust.soict.hedspi.aims.utils.Date;
+import hust.soict.hedspi.aims.utils.myDate;
 import java.util.ArrayList;
 
 /**
@@ -20,18 +20,18 @@ public class Order {
     public static final int MAX_LIMITED_ORDERS = 5;
     public static int nbOrdered = 0;
     private ArrayList<Media> itemsOrdered = new ArrayList<>();
-    private Date dateOrdered;
+    private myDate dateOrdered;
     private int id;
 
-    public Date getDateOrdered() {
+    public myDate getDateOrdered() {
         return dateOrdered;
     }
 
-    public void setDateOrdered(Date dateOrdered) {
+    public void setDateOrdered(myDate dateOrdered) {
         this.dateOrdered = dateOrdered;
     }
 
-    public Order(Date dateOrdered) {
+    public Order(myDate dateOrdered) {
         this.dateOrdered = dateOrdered;
         nbOrdered++;
     }

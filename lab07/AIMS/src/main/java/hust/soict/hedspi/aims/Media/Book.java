@@ -66,7 +66,7 @@ public class Book extends Media{
     
     @Override
     public String showInfo() {
-        return "Book: " + getTitle() + " - " + getCategory() + " - " + getAuthors()+ " - " + getCost();
+        return "BookID: " + getId() + " - " + getTitle() + " - " + getCategory() + " - " + getAuthors()+ " - " + getCost();
     }
     
 }

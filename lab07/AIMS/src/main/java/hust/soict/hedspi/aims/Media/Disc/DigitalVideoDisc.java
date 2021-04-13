@@ -20,7 +20,7 @@ public class DigitalVideoDisc extends Disc implements Playable{
 
     @Override
     public String showInfo() {
-        return "DVD: " + getTitle() + " - " + getCategory() + " - " + getDirector() + " - " + getCost();
+        return "DVD ID: " + getId() + " - " + getTitle() + " - " + getCategory() + " - " + getDirector() + " - " + getCost();
     }
     
     @Override
